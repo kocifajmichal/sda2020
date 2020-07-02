@@ -1,2 +1,5 @@
 **/bin
 **/obj
+**/data-repository*
+.vscode
+**/node_modules

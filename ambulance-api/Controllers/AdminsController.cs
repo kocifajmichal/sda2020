@@ -24,9 +24,26 @@ namespace ambulance_api.Controllers
             {
                 return BadRequest();
             }
+            if (ambulanceId != ambulance.Id)
+            {
+                return BadRequest("Different Ids!");
+            }
+            var existing = myDataRepository.GetAmbulanceData(ambulanceId);
+            if (existing != null)
+            {
+                return BadRequest("Ambulance with given Id already exists!");
+            }
             return Ok(myDataRepository.UpsertAmbulanceData(ambulanceId, ambulance));
         }
 
-        
+        [HttpDelete("ambulance/{ambulanceId}")]
+        public IActionResult DeleteAmbulance(string ambulanceId)
+        {
+            if (myDataRepository.DeleteAmbulanceData(ambulanceId))
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }

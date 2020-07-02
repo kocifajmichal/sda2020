@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ambulance_api.Models
@@ -13,5 +14,11 @@ namespace ambulance_api.Models
 
         [DataMember]
         public string RoomNumber { get; set; }
+
+        [DataMember]
+        public IList<Condition> Conditions { get; set; }
+
+        [DataMember]
+        public IList<WaitingListEntry> WaitingList { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using ambulance_api.Models;
 using LiteDB;
@@ -24,7 +25,12 @@ namespace ambulance_api.Services
 
         public Ambulance GetAmbulanceData(string ambulanceId)
         {
-            return GetCollection().FindById(ambulanceId);
+            var ambulance = GetCollection().FindById(ambulanceId);
+            if (ambulance.WaitingList == null)
+            {
+                ambulance.WaitingList = new List<WaitingListEntry>();
+            }
+            return ambulance;
         }
 
         public Ambulance UpsertAmbulanceData(string ambulanceId, Ambulance ambulance)
