@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace ambulance_api.Models
 {
@@ -28,6 +29,7 @@ namespace ambulance_api.Models
         [DataMember]
         public string OpeningTime { get; set; } 
 
+        [JsonIgnore]
         public TimeSpan OpeningTimeSpan 
         {
             get => ParseTimeSpan(OpeningTime);
@@ -40,6 +42,7 @@ namespace ambulance_api.Models
         [DataMember]
         public string ClosingTime { get; set; } 
 
+        [JsonIgnore]
         public TimeSpan ClosingTimeSpan 
         {
             get => ParseTimeSpan(ClosingTime);

@@ -26,15 +26,16 @@ namespace ambulance_api.Services
         public Ambulance GetAmbulanceData(string ambulanceId)
         {
             var ambulance = GetCollection().FindById(ambulanceId);
-            if (ambulance.WaitingList == null)
+            if (ambulance != null)
             {
-                ambulance.WaitingList = new List<WaitingListEntry>();
+                ambulance.EstimateAndSortWaitingList();
             }
             return ambulance;
         }
 
         public Ambulance UpsertAmbulanceData(string ambulanceId, Ambulance ambulance)
         {
+            ambulance.EstimateAndSortWaitingList();
             var existing = GetCollection().FindById(ambulanceId);
             if (existing == null)
             {
